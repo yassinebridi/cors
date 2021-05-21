@@ -33,7 +33,7 @@ jobs:
           PB_TYPE: link
           PB_TITLE: Cors Worker Build failed
           PB_BODY: Cors worker build has failed.
-          PB_URL: https://github.com/yassinebridi/pushbullet-action/runs/242945729
+          PB_URL: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
       - name: Pushbullet Notification
         uses: yassinebridi/pushbullet-action@v1.0.2
         if: steps.publish.outcome == 'success'
@@ -42,4 +42,4 @@ jobs:
           PB_TYPE: link
           PB_TITLE: Cors Worker is Published
           PB_BODY: Cors worker has been built and published.
-          PB_URL: https://github.com/yassinebridi/pushbullet-action/runs/242945729
+          PB_URL: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
