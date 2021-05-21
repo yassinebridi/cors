@@ -19,8 +19,27 @@ jobs:
       - name: Install deps
         run: npm install
       - name: Publish
+        id: publish
         uses: cloudflare/wrangler-action@1.2.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
         env:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      - name: Pushbullet Notification(if the build fails)
+        uses: yassinebridi/pushbullet-action@v1.0.2
+        if: steps.publish.outcome != 'success'
+        env:
+          PB_TOKEN: ${{ secrets.PB_TOKEN }}
+          PB_TYPE: link
+          PB_TITLE: Cors Worker Build failed
+          PB_BODY: Cors worker build has failed.
+          PB_URL: https://github.com/yassinebridi/pushbullet-action/runs/242945729
+      - name: Pushbullet Notification
+        uses: yassinebridi/pushbullet-action@v1.0.2
+        if: steps.publish.outcome == 'success'
+        env:
+          PB_TOKEN: ${{ secrets.PB_TOKEN }}
+          PB_TYPE: link
+          PB_TITLE: Cors Worker is Published
+          PB_BODY: Cors worker has been built and published.
+          PB_URL: https://github.com/yassinebridi/pushbullet-action/runs/242945729
