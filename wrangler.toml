@@ -1,0 +1,8 @@
+name = "cors"
+type = "webpack"
+workers_dev = true
+
+account_id = '8669a5ea68c52ce6afd7525c13e6fa70'
+zone_id = "be86d98957992c714d51bc11302436b5"
+
+route = 'cors.yasbr.com/*'
